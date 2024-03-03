@@ -65,7 +65,7 @@
 </head>
 <body>
     <video id="video-background" autoplay muted loop>
-        <source src="c:\\Users\\Usuario\\Downloads\\videofund2.mp4" type="video/mp4">
+        <source src="videofund2.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -77,42 +77,16 @@
         </div>
     </div>
 
-    <h1>Registro de Usuário</h1>
-    <form id="register-form">
-        <label for="username">Nome de Usuário (4-15 caracteres):</label><br>
-        <input type="text" id="username" name="username" minlength="4" maxlength="15" required><br>
-        <label for="password">Senha (mínimo 4 caracteres):</label><br>
-        <input type="password" id="password" name="password" minlength="4" required><br><br>
-        <input type="submit" value="Registrar">
-    </form>
-
-    <script>
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Verifica se o nome de usuário já está armazenado localmente
-            if (localStorage.getItem(username)) {
-                alert('Nome de usuário já existe. Por favor, escolha outro.');
-                return;
-            }
-
-            // Armazena o nome de usuário e a senha localmente
-            localStorage.setItem(username, password);
-
-            alert('Registro concluído com sucesso! Você pode fazer login agora.');
-        });
-    </script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const chatMessages = document.getElementById('chat-messages');
             const userInput = document.getElementById('user-input');
             const sendBtn = document.getElementById('send-btn');
 
-            sendBtn.addEventListener('click', sendMessage);
+            sendBtn.addEventListener('click', function() {
+                sendMessage();
+            });
+
             userInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     sendMessage();
@@ -128,6 +102,7 @@
 
             function appendMessage(sender, message) {
                 const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
                 messageElement.textContent = sender + ': ' + message;
                 chatMessages.appendChild(messageElement);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -136,4 +111,3 @@
     </script>
 </body>
 </html>
-
